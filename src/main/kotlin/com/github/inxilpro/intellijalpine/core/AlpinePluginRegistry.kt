@@ -100,10 +100,12 @@ class AlpinePluginRegistry {
                 }
 
                 if (hasPackageJsonChanges) {
-                    ApplicationManager.getApplication().runReadAction {
-                        getRegisteredPlugins().forEach { plugin ->
-                            if (!isPluginEnabled(project, plugin.getPluginName()) && detector.detect(project, plugin)) {
-                                enablePlugin(project, plugin.getPluginName())
+                    ApplicationManager.getApplication().executeOnPooledThread {
+                        ApplicationManager.getApplication().runReadAction {
+                            getRegisteredPlugins().forEach { plugin ->
+                                if (!isPluginEnabled(project, plugin.getPluginName()) && detector.detect(project, plugin)) {
+                                    enablePlugin(project, plugin.getPluginName())
+                                }
                             }
                         }
                     }

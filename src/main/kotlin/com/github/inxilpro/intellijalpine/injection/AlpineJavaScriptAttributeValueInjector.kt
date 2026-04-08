@@ -103,6 +103,7 @@ class AlpineJavaScriptAttributeValueInjector : MultiHostInjector {
 
         val jsLanguage = Language.findLanguageByID("JavaScript")
             ?: throw IllegalStateException("JavaScript language not found")
+
         registrar.startInjecting(jsLanguage)
 
         ranges.forEachIndexed { index, range ->

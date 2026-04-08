@@ -3,12 +3,8 @@ package com.github.inxilpro.intellijalpine.core.detection
 import com.github.inxilpro.intellijalpine.core.AlpinePlugin
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
-import com.intellij.psi.PsiManager
 import com.intellij.psi.search.FilenameIndex
 import com.intellij.psi.search.GlobalSearchScope
-import com.intellij.psi.util.PsiTreeUtil
-import com.intellij.psi.xml.XmlFile
-import com.intellij.psi.xml.XmlTag
 
 class ScriptReferenceDetector : DetectionStrategy {
     override fun detect(project: Project, plugin: AlpinePlugin): Boolean {
@@ -26,26 +22,11 @@ class ScriptReferenceDetector : DetectionStrategy {
         }
 
         return htmlFiles.any { virtualFile ->
-            val psiFile = PsiManager.getInstance(project).findFile(virtualFile)
-
-            when {
-                // If the IDE knows it's XML, use structured data
-                psiFile is XmlFile -> PsiTreeUtil.collectElementsOfType(psiFile, XmlTag::class.java)
-                    .filter { it.name.equals("script", ignoreCase = true) }
-                    .any { scriptTag ->
-                        val src = scriptTag.getAttributeValue("src")
-                        src != null && containsPackageReference(src, plugin)
-                    }
-
-                // Otherwise, just look at the contents of the file
-                else -> {
-                    try {
-                        val content = String(virtualFile.contentsToByteArray())
-                        hasScriptTagsInContent(content, plugin)
-                    } catch (_: Exception) {
-                        false
-                    }
-                }
+            try {
+                val content = String(virtualFile.contentsToByteArray())
+                hasScriptTagsInContent(content, plugin)
+            } catch (_: Exception) {
+                false
             }
         }
     }
