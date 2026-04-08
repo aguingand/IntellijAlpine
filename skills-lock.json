@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "intellij-platform-sdk": {
+      "source": "gadfly3173/intellij-platform-sdk-skills",
+      "sourceType": "github",
+      "computedHash": "3a0494b282416b56f58aa8f6386b7e580233b97261a4670867585ccd15c117f8"
+    }
+  }
+}
