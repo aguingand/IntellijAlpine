@@ -85,6 +85,16 @@ class AlpineJavaScriptAttributeValueInjector : MultiHostInjector {
 
     private val eventMagics = "/** @type {eventType} */\nlet ${'$'}event;\n\n"
 
+    private val resizeMagics =
+        """
+            /** @type number */
+            let ${'$'}width;
+
+            /** @type number */
+            let ${'$'}height;
+                    
+        """.trimIndent()
+
     override fun getLanguagesToInject(registrar: MultiHostRegistrar, host: PsiElement) {
         if (host !is XmlAttributeValue) {
             return
@@ -170,6 +180,8 @@ class AlpineJavaScriptAttributeValueInjector : MultiHostInjector {
         } else if ("x-teleport" == directive) {
             context.left += "{ /** @var {HTMLElement} teleport */let teleport = "
             context.right += " }"
+        } else if ("x-resize" == directive) {
+            context.left += resizeMagics
         } else if ("x-init" == directive) {
             // We want x-init to skip the directive wrapping
         } else {
