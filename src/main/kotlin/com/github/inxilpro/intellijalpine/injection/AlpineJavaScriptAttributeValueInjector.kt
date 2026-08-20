@@ -170,8 +170,8 @@ class AlpineJavaScriptAttributeValueInjector : MultiHostInjector {
         } else if ("x-teleport" == directive) {
             context.left += "{ /** @var {HTMLElement} teleport */let teleport = "
             context.right += " }"
-        } else if ("x-init" == directive) {
-            // We want x-init to skip the directive wrapping
+        } else if ("x-init" == directive || "x-effect" == directive) {
+            // We want x-init and x-effect to skip the directive wrapping
         } else {
             context.left += "__ALPINE_DIRECTIVE(\n"
             context.right += "\n)"
