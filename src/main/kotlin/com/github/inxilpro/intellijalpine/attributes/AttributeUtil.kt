@@ -44,6 +44,7 @@ object AttributeUtil {
         "x-intersect",
         "x-trap",
         "x-collapse",
+        "x-resize",
         "x-spread", // deprecated
     )
 
@@ -125,6 +126,10 @@ object AttributeUtil {
 
     val intersectModifiers = arrayOf(
         "once"
+    )
+
+    val resizeModifiers = arrayOf(
+        "document"
     )
 
     // Taken from https://developer.mozilla.org/en-US/docs
