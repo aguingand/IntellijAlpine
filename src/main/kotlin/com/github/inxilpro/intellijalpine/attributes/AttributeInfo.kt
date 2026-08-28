@@ -35,6 +35,7 @@ class AttributeInfo(val attribute: String) {
         "x-intersect" to "Bind an intersection observer",
         "x-trap" to "Add focus trap",
         "x-collapse" to "Collapse element when hidden",
+        "x-resize" to "Listen to element size changes using ResizeObserver",
     )
 
     val name: String

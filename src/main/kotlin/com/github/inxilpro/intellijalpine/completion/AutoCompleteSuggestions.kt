@@ -38,6 +38,10 @@ class AutoCompleteSuggestions(val htmlTag: HtmlTag, val partialAttribute: String
             if ("x-intersect" == directive) {
                 addModifiers(directive, AttributeUtil.intersectModifiers)
             }
+
+            if ("x-resize" == directive) {
+                addModifiers(directive, AttributeUtil.resizeModifiers)
+            }
         }
     }
 
