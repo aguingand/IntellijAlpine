@@ -182,8 +182,8 @@ class AlpineJavaScriptAttributeValueInjector : MultiHostInjector {
             context.right += " }"
         } else if ("x-resize" == directive) {
             context.left += resizeMagics
-        } else if ("x-init" == directive) {
-            // We want x-init to skip the directive wrapping
+        } else if ("x-init" == directive || "x-effect" == directive) {
+            // We want x-init and x-effect to skip the directive wrapping
         } else {
             context.left += "__ALPINE_DIRECTIVE(\n"
             context.right += "\n)"
